@@ -1,0 +1,20 @@
+:3000 {
+	log {
+		output stdout
+		level info
+		format filter {
+			request>headers>X-Api-Key replace REDACTED
+		}
+	}
+
+	reverse_proxy backend:8080 {
+		transport mirror {
+			to shadow:9090 10
+			max_body_size 1MB
+			timeout 3s
+			header X-Api-Key {env.MIRROR_API_KEY}
+			header +X-Mirrored-From primary
+			header -Authorization
+		}
+	}
+}
