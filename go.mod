@@ -1,6 +1,6 @@
 module github.com/loafoe/caddy-mirror
 
-go 1.25.1
+go 1.27.1
 
 require (
 	github.com/caddyserver/caddy/v2 v2.11.4
